@@ -1,0 +1,24 @@
+// Ionic Variables and Theming
+// https://ionicframework.com/docs/theming/
+
+:root {
+  /** Primary Color: Rojo **/
+  --ion-color-primary: #e53935;
+  --ion-color-primary-rgb: 229, 57, 53;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #ca322f;
+  --ion-color-primary-tint: #e84d49;
+}
+
+.ion-palette-dark,
+html.ion-palette-dark,
+body.ion-palette-dark {
+  /** Primary Color en modo oscuro: Rojo brillante **/
+  --ion-color-primary: #ef5350;
+  --ion-color-primary-rgb: 239, 83, 80;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #d24946;
+  --ion-color-primary-tint: #f16462;
+}

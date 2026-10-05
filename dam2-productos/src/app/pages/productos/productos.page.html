@@ -1,0 +1,174 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/inicio">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Productos
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleTheme()" fill="clear">
+        {{ isDarkMode ? '☀️ Claro' : '🌙 Oscuro' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h1>Listado de productos</h1>
+
+  @if (loading) {
+    <div class="loading">
+      <ion-spinner></ion-spinner>
+      <p>
+        Cargando productos...
+      </p>
+    </div>
+  }
+
+  @if (error) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          Error
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          {{ error }}
+        </p>
+        <ion-button
+          (click)="loadProducts()">
+          Reintentar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (!loading && !error) {
+    <div class="pagination-header">
+      <p>
+        Página <strong>{{ currentPage }}</strong> de <strong>{{ totalPages }}</strong>
+        (Mostrando <strong>{{ products.length }}</strong> de <strong>{{ total }}</strong> productos)
+      </p>
+
+      <div class="limit-selector">
+        <label for="limitSelect">Por página: </label>
+        <select
+          id="limitSelect"
+          [value]="limit"
+          (change)="onLimitChange(+$any($event.target).value)">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+          <option [value]="30">30</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Ancho</th>
+            <th>Alto</th>
+            <th>Valoración</th>
+            <th>Stock</th>
+            <th>Stock Valorado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (
+            product of products;
+            track product.id
+          ) {
+            <tr>
+              <td>
+                {{ product.id }}
+              </td>
+              <td>
+                <div class="product">
+                  <img
+                    [src]="product.thumbnail"
+                    [alt]="product.title">
+                  <span>
+                    {{ product.title }}
+                  </span>
+                </div>
+              </td>
+              <td>
+                {{ product.category }}
+              </td>
+              <td>
+                {{ product.brand || 'Sin marca' }}
+              </td>
+              <td>
+                {{ product.price | currency:'EUR' }}
+              </td>
+              <td>
+                {{ product.dimensions?.width ?? '-' }}
+              </td>
+              <td>
+                {{ product.dimensions?.height ?? '-' }}
+              </td>
+              <td>
+                ⭐ {{ product.rating }}
+              </td>
+              <td>
+                {{ product.stock }}
+              </td>
+              <td>
+                {{ getStockValorado(product) | currency:'EUR' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination-controls">
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="currentPage === 1 || loading"
+        (click)="goToPage(1)">
+        ⏮ Primera
+      </ion-button>
+
+      <ion-button
+        fill="solid"
+        size="small"
+        [disabled]="currentPage === 1 || loading"
+        (click)="prevPage()">
+        ◀ Anterior
+      </ion-button>
+
+      <span class="page-indicator">
+        Pág. <strong>{{ currentPage }}</strong> / <strong>{{ totalPages }}</strong>
+      </span>
+
+      <ion-button
+        fill="solid"
+        size="small"
+        [disabled]="currentPage === totalPages || loading"
+        (click)="nextPage()">
+        Siguiente ▶
+      </ion-button>
+
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="currentPage === totalPages || loading"
+        (click)="goToPage(totalPages)">
+        Última ⏭
+      </ion-button>
+    </div>
+  }
+</ion-content>

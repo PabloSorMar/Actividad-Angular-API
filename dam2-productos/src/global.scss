@@ -1,0 +1,93 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+@import "@ionic/angular/css/palettes/dark.class.css";
+
+/* Color primario: Rojo en lugar de azul */
+:root {
+  --ion-color-primary: #e53935;
+  --ion-color-primary-rgb: 229, 57, 53;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #ca322f;
+  --ion-color-primary-tint: #e84d49;
+}
+
+/* Reglas explícitas para botones */
+ion-button:not([color]),
+ion-button[color="primary"] {
+  --background: var(--ion-color-primary, #e53935);
+  --color: #ffffff;
+
+  &[fill="outline"] {
+    --background: transparent;
+    --color: var(--ion-color-primary, #e53935);
+    --border-color: var(--ion-color-primary, #e53935);
+  }
+
+  &[fill="clear"] {
+    --background: transparent;
+    --color: var(--ion-color-primary, #e53935);
+  }
+}
+
+/* Estilos adicionales para modo oscuro */
+html.ion-palette-dark,
+body.ion-palette-dark {
+  --ion-color-primary: #ef5350;
+  --ion-color-primary-rgb: 239, 83, 80;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #d24946;
+  --ion-color-primary-tint: #f16462;
+
+  table {
+    color: var(--ion-text-color, #ffffff);
+  }
+
+  th {
+    background: var(--ion-color-primary, #ef5350);
+    color: #ffffff;
+  }
+
+  td {
+    border-bottom: 1px solid #333333 !important;
+  }
+
+  select {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #444444 !important;
+  }
+}
