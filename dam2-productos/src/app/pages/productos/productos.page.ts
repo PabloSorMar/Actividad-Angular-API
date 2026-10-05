@@ -29,6 +29,8 @@ import {
   ProductService
 } from '../../services/product.service';
 
+import { ThemeService } from '../../services/theme.service';
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.page.html',
@@ -53,6 +55,16 @@ import {
 export class ProductosPage implements OnInit {
   private productService = inject(ProductService);
   private cdr = inject(ChangeDetectorRef);
+  private themeService = inject(ThemeService);
+
+  get isDarkMode(): boolean {
+    return this.themeService.isDark();
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleDarkMode();
+    this.cdr.markForCheck();
+  }
 
   products: Product[] = [];
   total = 0;

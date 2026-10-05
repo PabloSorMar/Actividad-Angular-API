@@ -3,6 +3,11 @@
     <ion-title>
       Inicio
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleTheme()" fill="clear">
+        {{ isDarkMode ? '☀️ Claro' : '🌙 Oscuro' }}
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -19,6 +24,9 @@
     </ion-button>
     <ion-button routerLink="/about" fill="outline">
       About
+    </ion-button>
+    <ion-button (click)="toggleTheme()" fill="outline" color="medium">
+      {{ isDarkMode ? '☀️ Desactivar Modo Oscuro' : '🌙 Activar Modo Oscuro' }}
     </ion-button>
   </div>
 </ion-content>

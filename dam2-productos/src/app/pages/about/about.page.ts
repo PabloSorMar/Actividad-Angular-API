@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -14,6 +14,7 @@ import {
   IonButton,
   IonIcon
 } from '@ionic/angular';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-about',
@@ -37,4 +38,14 @@ import {
   ]
 })
 export class AboutPage {
+  private themeService = inject(ThemeService);
+
+  get isDarkMode(): boolean {
+    return this.themeService.isDark();
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleDarkMode();
+  }
 }
+

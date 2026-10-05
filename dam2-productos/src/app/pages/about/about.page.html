@@ -4,6 +4,11 @@
       <ion-back-button defaultHref="/inicio"></ion-back-button>
     </ion-buttons>
     <ion-title>About</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleTheme()" fill="clear">
+        {{ isDarkMode ? '☀️ Claro' : '🌙 Oscuro' }}
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
