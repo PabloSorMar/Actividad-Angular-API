@@ -34,15 +34,50 @@
 
 @import "@ionic/angular/css/palettes/dark.class.css";
 
+/* Color primario: Rojo en lugar de azul */
+:root {
+  --ion-color-primary: #e53935;
+  --ion-color-primary-rgb: 229, 57, 53;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #ca322f;
+  --ion-color-primary-tint: #e84d49;
+}
+
+/* Reglas explícitas para botones */
+ion-button:not([color]),
+ion-button[color="primary"] {
+  --background: var(--ion-color-primary, #e53935);
+  --color: #ffffff;
+
+  &[fill="outline"] {
+    --background: transparent;
+    --color: var(--ion-color-primary, #e53935);
+    --border-color: var(--ion-color-primary, #e53935);
+  }
+
+  &[fill="clear"] {
+    --background: transparent;
+    --color: var(--ion-color-primary, #e53935);
+  }
+}
+
 /* Estilos adicionales para modo oscuro */
 html.ion-palette-dark,
 body.ion-palette-dark {
+  --ion-color-primary: #ef5350;
+  --ion-color-primary-rgb: 239, 83, 80;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #d24946;
+  --ion-color-primary-tint: #f16462;
+
   table {
     color: var(--ion-text-color, #ffffff);
   }
 
   th {
-    background: var(--ion-color-primary, #3880ff);
+    background: var(--ion-color-primary, #ef5350);
     color: #ffffff;
   }
 
