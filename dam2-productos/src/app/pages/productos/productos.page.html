@@ -61,6 +61,7 @@
             <th>Alto</th>
             <th>Valoración</th>
             <th>Stock</th>
+            <th>Stock Valorado</th>
           </tr>
         </thead>
         <tbody>
@@ -102,6 +103,9 @@
               </td>
               <td>
                 {{ product.stock }}
+              </td>
+              <td>
+                {{ getStockValorado(product) | currency:'EUR' }}
               </td>
             </tr>
           }

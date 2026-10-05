@@ -84,4 +84,14 @@ export class ProductosPage implements OnInit {
         }
       });
   }
+
+  getStockValorado(product: Product): number {
+    const stock = product.stock || 0;
+    const price = product.price || 0;
+    const discountPercentage = product.discountPercentage || 0;
+    const subtotal = stock * price;
+    const descuento = (subtotal * discountPercentage) / 100;
+    return subtotal - descuento;
+  }
 }
+
