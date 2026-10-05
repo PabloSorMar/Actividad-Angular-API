@@ -57,6 +57,8 @@
             <th>Categoría</th>
             <th>Marca</th>
             <th>Precio</th>
+            <th>Ancho</th>
+            <th>Alto</th>
             <th>Valoración</th>
             <th>Stock</th>
           </tr>
@@ -88,6 +90,12 @@
               </td>
               <td>
                 {{ product.price | currency:'EUR' }}
+              </td>
+              <td>
+                {{ product.dimensions?.width ?? '-' }}
+              </td>
+              <td>
+                {{ product.dimensions?.height ?? '-' }}
               </td>
               <td>
                 ⭐ {{ product.rating }}
