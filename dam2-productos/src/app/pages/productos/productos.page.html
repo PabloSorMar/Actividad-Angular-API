@@ -43,10 +43,25 @@
   }
 
   @if (!loading && !error) {
-    <p>
-      Productos cargados:
-      <strong>{{ products.length }}</strong>
-    </p>
+    <div class="pagination-header">
+      <p>
+        Página <strong>{{ currentPage }}</strong> de <strong>{{ totalPages }}</strong>
+        (Mostrando <strong>{{ products.length }}</strong> de <strong>{{ total }}</strong> productos)
+      </p>
+
+      <div class="limit-selector">
+        <label for="limitSelect">Por página: </label>
+        <select
+          id="limitSelect"
+          [value]="limit"
+          (change)="onLimitChange(+$any($event.target).value)">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+          <option [value]="30">30</option>
+        </select>
+      </div>
+    </div>
 
     <div class="table-container">
       <table>
@@ -111,6 +126,44 @@
           }
         </tbody>
       </table>
+    </div>
+
+    <div class="pagination-controls">
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="currentPage === 1 || loading"
+        (click)="goToPage(1)">
+        ⏮ Primera
+      </ion-button>
+
+      <ion-button
+        fill="solid"
+        size="small"
+        [disabled]="currentPage === 1 || loading"
+        (click)="prevPage()">
+        ◀ Anterior
+      </ion-button>
+
+      <span class="page-indicator">
+        Pág. <strong>{{ currentPage }}</strong> / <strong>{{ totalPages }}</strong>
+      </span>
+
+      <ion-button
+        fill="solid"
+        size="small"
+        [disabled]="currentPage === totalPages || loading"
+        (click)="nextPage()">
+        Siguiente ▶
+      </ion-button>
+
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="currentPage === totalPages || loading"
+        (click)="goToPage(totalPages)">
+        Última ⏭
+      </ion-button>
     </div>
   }
 </ion-content>

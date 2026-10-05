@@ -59,20 +59,27 @@ export class ProductosPage implements OnInit {
   loading = false;
   error = '';
 
+  limit = 10;
+  currentPage = 1;
+  totalPages = 1;
+
   ngOnInit(): void {
-    this.loadProducts();
+    this.loadProducts(1);
   }
 
-  loadProducts(): void {
+  loadProducts(page: number = this.currentPage): void {
     this.loading = true;
     this.error = '';
+    this.currentPage = page;
+    const skip = (page - 1) * this.limit;
     this.cdr.markForCheck();
 
-    this.productService.getProducts()
+    this.productService.getProducts(this.limit, skip)
       .subscribe({
         next: (response: ProductsResponse) => {
           this.products = response.products;
           this.total = response.total;
+          this.totalPages = Math.ceil(this.total / this.limit) || 1;
           this.loading = false;
           this.cdr.markForCheck();
         },
@@ -85,6 +92,29 @@ export class ProductosPage implements OnInit {
       });
   }
 
+  nextPage(): void {
+    if (this.currentPage < this.totalPages && !this.loading) {
+      this.loadProducts(this.currentPage + 1);
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1 && !this.loading) {
+      this.loadProducts(this.currentPage - 1);
+    }
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages && page !== this.currentPage && !this.loading) {
+      this.loadProducts(page);
+    }
+  }
+
+  onLimitChange(newLimit: number): void {
+    this.limit = Number(newLimit);
+    this.loadProducts(1);
+  }
+
   getStockValorado(product: Product): number {
     const stock = product.stock || 0;
     const price = product.price || 0;
@@ -94,4 +124,3 @@ export class ProductosPage implements OnInit {
     return subtotal - descuento;
   }
 }
-
